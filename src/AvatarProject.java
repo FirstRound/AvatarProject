@@ -3,6 +3,8 @@
  */
 public class AvatarProject {
     public static void main(String[] args) {
-        System.out.print("Hello, World!");
+        for (int i = 0 ;i < 20; i++) {
+            System.out.print("Hello, World!");
+        }
     }
 }
