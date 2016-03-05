@@ -3,13 +3,9 @@
  */
 public class AvatarProject {
 
+    private static GlobalController gc = new GlobalController();
+
     public static void main(String[] args) {
-        GlobalController gc = new GlobalController();
-        try {
-            gc.mainLoop();
-        }
-        catch(Exception ex){
-            System.out.print(ex.getMessage());
-        }
+        gc.run();
     }
 }

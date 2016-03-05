@@ -1,17 +1,16 @@
 /**
  * Created by pisatel on 05.03.16.
+ * Singleton
  */
 public class User {
 
-    private User() {
+    private int _id;
 
+    public void setUserId(int id){
+        _id = id;
     }
 
-    private static User _user;
-
-    public static User getInstance() {
-        if(_user == null)
-            _user = new User();
-        return _user;
+    public int getUserId() {
+        return _id;
     }
 }
