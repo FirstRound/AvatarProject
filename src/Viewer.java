@@ -43,7 +43,7 @@ public class Viewer implements Runnable{
                 Thread.sleep(1000);
             }
             catch (Exception ex) {
-                System.out.print(ex.getCause());
+                System.out.print(ex.getMessage());
             }
         }
     }
