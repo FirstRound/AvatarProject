@@ -2,7 +2,7 @@
 
 ##TODO list:
 
-All telegram bot\n
+All telegram bot\\
 Add logger
 Add avg avatar panel
 Add saving data to file
