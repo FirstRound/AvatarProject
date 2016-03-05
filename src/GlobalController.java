@@ -14,6 +14,7 @@ public class GlobalController {
             viewer.showCurrentState(current_state);
             bot.sendCurrentStateMessage(current_state);
             Thread.sleep(1000); // sleep 1 sec
+
         }
 
     }
