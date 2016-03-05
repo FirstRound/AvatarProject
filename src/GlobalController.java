@@ -30,7 +30,7 @@ public class GlobalController implements Runnable {
         //TODO: DELETE THIS CODE
         ArrayList<Device> lst = new ArrayList<>();
         for (int i = 0; i < 10 ;i++) {
-            lst.add(new Device());
+            lst.add(new Device(i, "HUI"));
         }
         _devices_controller.addDevices(lst);
     }
