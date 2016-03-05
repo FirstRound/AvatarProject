@@ -25,16 +25,16 @@ public class GlobalController implements Runnable {
         addDevices(); // DELETE THIS
     }
 
-    //BEGIN DIKII PIZDETS
+    //BEGIN TMP METHOD
     public void addDevices() { // we should get devices smwhr (???)
         //TODO: DELETE THIS CODE
         ArrayList<Device> lst = new ArrayList<>();
         for (int i = 0; i < 10 ;i++) {
-            lst.add(new Device(i, "HUI"));
+            lst.add(new Device(i, "name"));
         }
         _devices_controller.addDevices(lst);
     }
-    //END DIKII PIZDETS
+    //END TMP METHOD
 
     public void run(){
         init();
