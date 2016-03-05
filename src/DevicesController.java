@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class DevicesController {
 
     private ArrayList<Device> devices = new ArrayList<>();
-    private RandomDataGenerator _data_getter = new RandomDataGenerator();
+    private DataSource _data_source = new RandomDataGenerator();
 
     public void addDevices(ArrayList<Device> list) {
         devices.addAll(list);
@@ -15,7 +15,7 @@ public class DevicesController {
     public int getCurrentConsumption() {
         int sum = 0;
         for (Device d : devices) {
-            sum += _data_getter.getCurrentConsumption(d);
+            sum += _data_source.getCurrentConsumption(d);
         }
         return sum;
     }

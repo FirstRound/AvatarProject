@@ -17,6 +17,7 @@ public class Analyzer {
         _devices_controller = dc;
     }
 
+    //TODO: make grading
     public ConsumptionState getCurrentState() {
         _current_consumption = _devices_controller.getCurrentConsumption();
         ConsumptionState state;
