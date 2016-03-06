@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,7 @@ public class GlobalController implements Runnable {
     private Viewer _viewer = new Viewer();
     private TelegramBot _bot;
     private User _user = new User();
+    private String _filename = "./config.ini";
     private DevicesController _devices_controller = new DevicesController();
 
     private Thread _viewer_thread;
@@ -22,19 +25,8 @@ public class GlobalController implements Runnable {
         _user.setUserId(MAGIC_USER); // telegram user
         _bot = new TelegramBot(_user); // init bot and link it with user
         _analyzer = new Analyzer(_devices_controller); // send dc to analyzer. For speed-up
-        addDevices(); // DELETE THIS
+        initDevices(); // DELETE THIS
     }
-
-    //BEGIN TMP METHOD
-    public void addDevices() { // we should get devices smwhr (???)
-        //TODO: DELETE THIS CODE
-        ArrayList<Device> lst = new ArrayList<>();
-        for (int i = 0; i < 10 ;i++) {
-            lst.add(new Device(i, "name"));
-        }
-        _devices_controller.addDevices(lst);
-    }
-    //END TMP METHOD
 
     public void run(){
         init();
@@ -57,4 +49,20 @@ public class GlobalController implements Runnable {
         }
 
     }
+
+    //get devices from config file
+    private void initDevices() {
+        ArrayList<Device> lst = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(_filename))) {
+            for(String line; (line = br.readLine()) != null; ) {
+                String[] tmp = line.split(";");
+                lst.add(new Device(Integer.parseInt(tmp[0]), tmp[1]));
+            }
+        }
+        catch (Exception ex) {
+            System.out.print(ex.getMessage());
+        }
+        _devices_controller.addDevices(lst);
+    }
+
 }

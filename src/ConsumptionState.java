@@ -9,8 +9,8 @@ public enum ConsumptionState {
     LOW,
     BELOW_TO_AVG,
     AVG,
-    HIGHTER_THEN_AVG,
     HIGHT,
+    HIGHTER_THEN_AVG,
     VERY_HIGHT,
     CRITICAL_HIGHT
 }
