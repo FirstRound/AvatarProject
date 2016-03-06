@@ -66,6 +66,9 @@ public class GlobalController implements Runnable {
             line = br.readLine();
             String[] tmp = line.split(":");
             _analyzer.setAvgConsumption(Integer.parseInt(tmp[1]));
+            line = br.readLine();
+            tmp = line.split(":");
+            _bot.setToken(tmp[1]+":"+tmp[2]);
         }
         catch (Exception ex) {
             System.out.print(ex.getMessage());
