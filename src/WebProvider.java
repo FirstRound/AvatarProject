@@ -18,6 +18,10 @@ public class WebProvider {
     }
 
     public void sendMessageToUserByTelegram(String message, User user) {
+        //TODO: Implement
+    }
 
+    private void sendPostRequest(String url, String[] params) {
+        //TODO: Implement
     }
 }

@@ -11,15 +11,29 @@ public class Analyzer {
     private final int HIGHT_BOUND = 200;
 
     private int _current_consumption = 0;
+    private double _avg_consumption;
     private DevicesController _devices_controller = new DevicesController();
 
     public Analyzer(DevicesController dc) {
         _devices_controller = dc;
     }
 
-    //TODO: make grading
+    public void setAvgConsumption(double avg) {
+        _avg_consumption = avg;
+    }
+
+    public ConsumptionState getAvgConsumptionState() {
+        return gradeState((int)_avg_consumption);
+    }
+
     public ConsumptionState getCurrentState() {
         _current_consumption = _devices_controller.getCurrentConsumption();
+        _avg_consumption = (_avg_consumption + _current_consumption) / 2.0;
+        return gradeState(_current_consumption);
+    }
+
+    //TODO: make grading
+    private ConsumptionState gradeState(int value) {
         ConsumptionState state;
         if (_current_consumption <= LOW_BOUND)
             state = ConsumptionState.LOW;

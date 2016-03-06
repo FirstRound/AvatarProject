@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class GlobalController implements Runnable {
 
-    private final int MAGIC_USER = 42; // just magic, don't touch this
+    private final int ADMIN_USER = 1; // just magic, don't touch this
 
     private ConsumptionState _current_state;
     private Analyzer _analyzer;
@@ -22,10 +22,11 @@ public class GlobalController implements Runnable {
     public void init() { //init all values before using
         _viewer_thread = new Thread(_viewer);
         _viewer_thread.start(); // run viewer in another thread
-        _user.setUserId(MAGIC_USER); // telegram user
+        _user.setUserId(ADMIN_USER); // telegram user
         _bot = new TelegramBot(_user); // init bot and link it with user
         _analyzer = new Analyzer(_devices_controller); // send dc to analyzer. For speed-up
-        initDevices(); // DELETE THIS
+
+        configSystem();
     }
 
     public void run(){
@@ -51,13 +52,20 @@ public class GlobalController implements Runnable {
     }
 
     //get devices from config file
-    private void initDevices() {
+    private void configSystem() {
         ArrayList<Device> lst = new ArrayList<>();
+        String line;
         try(BufferedReader br = new BufferedReader(new FileReader(_filename))) {
-            for(String line; (line = br.readLine()) != null; ) {
+            line = br.readLine();
+            int count = Integer.parseInt(line);
+            for(int i = 0; i < count; i++) {
+                line = br.readLine();
                 String[] tmp = line.split(";");
                 lst.add(new Device(Integer.parseInt(tmp[0]), tmp[1]));
             }
+            line = br.readLine();
+            String[] tmp = line.split(":");
+            _analyzer.setAvgConsumption(Integer.parseInt(tmp[1]));
         }
         catch (Exception ex) {
             System.out.print(ex.getMessage());
