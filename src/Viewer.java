@@ -10,6 +10,9 @@ public class Viewer implements Runnable{
     private volatile ConsumptionState _state;
     private JFrame _frame;
     private ArrayList<Component> _labels = new ArrayList<>();
+    private JPanel _panel = new JPanel();
+    private JPanel _image_panel = new JPanel();
+    private JPanel _button_panel = new JPanel();
     private Logger _logger = Logger.getInstance();
 
     public Viewer() {
@@ -22,28 +25,43 @@ public class Viewer implements Runnable{
     }
 
     private void initFrame() {
-        _frame = new JFrame("Avatar");
 
+        initResources();
+
+        _frame = new JFrame("Avatar");
+        _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        _frame.setSize(400, 300);
+        _frame.add(_panel);
+
+        _panel.setLayout(new BorderLayout());
+        _panel.add(_image_panel, BorderLayout.CENTER);
+        _panel.add(_button_panel, BorderLayout.NORTH);
+        _button_panel.add(new JButton("Change"));
+        _frame.setVisible(true);
+    }
+
+    private void initResources() {
         ImageIcon image1 = new ImageIcon("./img/Luk.jpg");
         _labels.add(new JLabel(image1));
 
         ImageIcon image2 = new ImageIcon("./img/Vader.jpeg");
         _labels.add(new JLabel(image2));
+    }
 
-        _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        _frame.getContentPane().add(_labels.get(1), BorderLayout.CENTER);
-        _frame.setSize(200, 300);
-        _frame.setVisible(true);
+    private void panelControl(int panel) {
+        //TODO: Implement
     }
 
     public void run() {
+
         initFrame();
 
         while(true) {
+            _image_panel.removeAll();
             System.out.print(_state.toString() + "\n");
-            _frame.getContentPane().removeAll();
-            _frame.getContentPane().add(_labels.get(_state.ordinal()/3), BorderLayout.CENTER);
+            _image_panel.add(_labels.get(_state.ordinal()/3), BorderLayout.CENTER);
             _frame.repaint();
+
 
             try {
                 Thread.sleep(1000);
